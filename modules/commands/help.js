@@ -2,28 +2,28 @@ module.exports.config = {
 	name: "help",
 	version: "1.0.2",
 	hasPermssion: 0,
-	credits: "JRT",
+	credits: "Mirai Team",
 	description: "Hướng dẫn cho người mới",
-	commandCategory: "Công cụ",
+	commandCategory: "Danh sách lệnh",
 	usages: "[Tên module]",
-	cooldowns: 5,
+	cooldowns: 60,
 	envConfig: {
 		autoUnsend: true,
-		delayUnsend: 30
+		delayUnsend: 60
 	}
 };
 
 module.exports.languages = {
 	"vi": {
-		"moduleInfo": "⚜ %1 ⚜\n%2\n\n❯ Cách sử dụng: %3\n❯ Thuộc nhóm: %4\n❯ Thời gian chờ: %5 giây(s)\n❯ Quyền hạn: %6\n\n⚔️ Module code by %7 ⚔️",
-		"helpList": '☠ Hiện tại đang có %1 lệnh có thể sử dụng trên bot này, Sử dụng: .%2help nameCommand" để xem chi tiết cách sử dụng! | Có gì thắc mắc hãy liên hệ:\nFb Admin BoT: https://www.facebook.com/NHD.JRT.262 ☠\nPhần -help này sẽ đóng trong 30 giây"',
+		"moduleInfo": "🔰%1🔰\n%2\n\n👉 Cách sử dụng: %3\n👉 Thuộc nhóm: %4\n👉 Thời gian chờ: %5 giây(s)\n👉 Quyền hạn: %6\n\n⚠Không Spam Bot⚠",
+		"helpList": '[ gõ /game masoi để có thể chơi game ma sói ]\n(mới update)\n---------------------------\n👾Số lệnh hiện có: %1\n✅Sử dụng: "%2help + tên lệnh" để xem chi tiết cách sử dụng\n⚠Nghiêm cấm hành vi spam và chửi bot⚠',
 		"user": "Người dùng",
         "adminGroup": "Quản trị viên nhóm",
         "adminBot": "Quản trị viên bot"
 	},
 	"en": {
 		"moduleInfo": "「 %1 」\n%2\n\n❯ Usage: %3\n❯ Category: %4\n❯ Waiting time: %5 seconds(s)\n❯ Permission: %6\n\n» Module code by %7 «",
-		"helpList": '[ There are %1 commands on this bot, Use: "%2help nameCommand" to know how to use! | Fb Admin BoT: https://www.fb.com/manhict ]',
+		"helpList": '[ There are %1 commands on this bot, Use: "%2help nameCommand" to know how to use! ]',
 		"user": "User",
         "adminGroup": "Admin group",
         "adminBot": "Admin bot"
@@ -58,7 +58,7 @@ module.exports.run = function({ api, event, args, getText }) {
 			if (!group.some(item => item.group.toLowerCase() == commandConfig.config.commandCategory.toLowerCase())) group.push({ group: commandConfig.config.commandCategory.toLowerCase(), cmds: [commandConfig.config.name] });
 			else group.find(item => item.group.toLowerCase() == commandConfig.config.commandCategory.toLowerCase()).cmds.push(commandConfig.config.name);
 		}
-		group.forEach(commandGroup => msg += `🥀 ${commandGroup.group.charAt(0).toUpperCase() + commandGroup.group.slice(1)} 🥀\n${commandGroup.cmds.join(', ')}\n\n`);
+		group.forEach(commandGroup => msg += `️🔮 ${commandGroup.group.charAt(0).toUpperCase() + commandGroup.group.slice(1)} ️🔮\n${commandGroup.cmds.join(', ')}\n\n`);
 		return api.sendMessage(msg + getText("helpList", commands.size, prefix), threadID, async (error, info) =>{
 			if (autoUnsend) {
 				await new Promise(resolve => setTimeout(resolve, delayUnsend * 1000));
